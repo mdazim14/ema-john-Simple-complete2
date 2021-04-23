@@ -9,3 +9,11 @@
     color: blue;
     font-weight: 400px;
 }
+.main-button {
+    background-color: gold;
+    width: 150px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius:5px;
+    cursor: pointer;
+}
