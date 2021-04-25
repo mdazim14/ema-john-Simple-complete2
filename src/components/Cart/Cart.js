@@ -11,13 +11,13 @@ const Cart = (props) => {
     }
 
     let shipping = 0;
-    if(shipping > 35){
+    if(total > 35){
         shipping = 0;
     }
     else if(total > 15){
         shipping = 4.99;
     }
-    else if(shipping > 0){
+    else if(total > 0){
         shipping = 12.99;
     }
 
