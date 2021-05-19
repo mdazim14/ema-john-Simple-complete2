@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import {UserContext} from "../../App";
 import { useHistory, useLocation } from "react-router-dom";
-import { handleFbSignIn, handleGoogleSignIn, handleSignOut, initializeLoginFramework } from "./LoginManager";
+import { createUserWithEmailAndPassword, handleFbSignIn, handleGoogleSignIn, handleSignOut, initializeLoginFramework, signInWithEmailAndPassword } from "./LoginManager";
 
 
 function Login() {
@@ -72,9 +72,20 @@ function Login() {
   const handleSubmit = (e) => {
     // console.log(user.email , user.password);
     if (newUser && user.email && user.password) {
-      // console.log("submitting");
+      createUserWithEmailAndPassword(user.name ,user.email, user.password)
+      .then(res =>{
+        setUser(res);
+      setLoggedInUser(res);
+      history.replace(from);
+      })
     }
     if (!newUser && user.email && user.password) {
+      signInWithEmailAndPassword(user.email, user.password)
+      .then(res =>{
+        setUser(res);
+      setLoggedInUser(res);
+      history.replace(from);
+      })
     }
     e.preventDefault();
   };
@@ -90,9 +101,6 @@ function Login() {
       <br />
       <button onClick={fbSignIn}>Sign In using facebook</button>
       <h1>Our own Authentication</h1>
-
-      {/* <h2>Name: {user.displayName}</h2>
-      <h2>Email: {user.displayName}</h2> */}
 
       <input
         type="checkbox"
